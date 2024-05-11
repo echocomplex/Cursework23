@@ -7,8 +7,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <map>
 #include <cstdio>
+#include <map>
 #include "Student.hpp"
 #include <ctime>
 
@@ -30,8 +30,8 @@ public:
     Student get (const unsigned int index);
     bool isExists (const Student unit);
     std::pair <List <Student>, List <Student>> split (std::string group);
-    List <Student> sort (List <Student> unit) const; 
-    void sortMap (std::map <std::string, int>& unit) const;
+    List <std::pair <Student, float>> sort (List <Student> unit) const; 
+    void sortMap (List <std::pair <std::string, float>>& unit) const;
     static void encrypt (const std::string filenameIn, const std::string filenameOut);
     static void decrypt (const std::string filenameIn, const std::string filenameOut);
 };

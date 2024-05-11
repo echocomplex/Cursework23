@@ -167,84 +167,37 @@ std::pair <List <Student>, List <Student>> tolkachev::split (std::string group) 
     return std::make_pair(main, other);
 }
 
-List <Student> tolkachev::sort (List <Student> unit) const {
-    List <Student> result;
-    std::map <std::string, int> good, normal, bad;
+List <std::pair <Student, float>> tolkachev::sort (List <Student> unit) const {
+    List <std::pair <Student, float>> result;
+    List <std::pair <std::string, float>> students;
     for (int i = 0; i < unit.length(); ++i) {
         List <grade> grades = unit[i].getGrades();
-        int five = 0, four = 0, three = 0, two = 0;
+        float avgMark = 0;
         for (int j = 0; j < grades.length(); ++j) {
-            if (grades[j].mark == 5) {
-                ++five;
-            }
-            else if (grades[j].mark == 4) {
-                ++four;
-            }
-            else if (grades[j].mark == 3) {
-                ++three;
-            }
-            else {
-                ++two;
-            }
+            avgMark += grades[j].mark;
         }
-        if (two != 0) {
-            bad[unit[i].getNumber()] = three;
-        }
-        else if (three != 0) {
-            normal[unit[i].getNumber()] = four;
-        }
-        else if (four != 0) {
-            good[unit[i].getNumber()] = five;
-        }
-        else {
-           result.append(unit[i]);
-        }
+        avgMark /= grades.length();
+        students.append(std::make_pair(unit[i].getNumber(), avgMark));
     }
-    this->sortMap(bad);
-    for (std::map<std::string, int>::iterator it = bad.begin(); it != bad.end(); ++it) {
+    this->sortMap(students);
+    for (int i = 0; i < students.length(); ++i) {
         Student u;
-        u.setNumber(it->first);
-        result.append(unit[unit.find(u)]);
-    }
-    this->sortMap(normal);
-    for (std::map<std::string, int>::iterator it = normal.begin(); it != normal.end(); ++it) {
-        Student u;
-        u.setNumber(it->first);
-        result.append(unit[unit.find(u)]);
-    }
-    this->sortMap(good);
-    for (std::map<std::string, int>::iterator it = good.begin(); it != good.end(); ++it) {
-        Student u;
-        u.setNumber(it->first);
-        result.append(unit[unit.find(u)]);
+        u.setNumber(students[i].first);
+        result.append(std::make_pair(unit[unit.find(u)], students[i].second));
     }
     return result;
 }
 
-void tolkachev::sortMap (std::map <std::string, int>& unit) const {
-    if (unit.size() == 0) {
-        return;
-    }
-    std::pair <std::string, int>* sortedArr = new std::pair <std::string, int>[unit.size()];
-    int index = 0;
-    for (std::map<std::string, int>::iterator it = unit.begin(); it != unit.end(); ++it) {
-        sortedArr[index++] = *it;
-    }
-    for (int i = 0; i < unit.size() - 1; ++i) {
-        for (int j = 0; j < unit.size() - i - 1; ++j) {
-            if (sortedArr[j].second > sortedArr[j + 1].second) {
-                std::pair <std::string, int> temp = sortedArr[j];
-                sortedArr[j] = sortedArr[j + 1];;
-                sortedArr[j + 1] = temp;
+void tolkachev::sortMap (List <std::pair <std::string, float>>& unit) const {
+    for (int i = 0; i < unit.length() - 1; ++i) {
+        for (int j = 0; j < unit.length() - i - 1; ++j) {
+            if (unit[j].second < unit[j + 1].second) {
+                std::pair <std::string, float> temp = unit[j];
+                unit[j] = unit[j + 1];
+                unit[j + 1] = temp;
             }
         }
     }
-    std::map <std::string, int> ready;
-    for (int i = 0; i < unit.size() - 1; ++i) {
-        ready.insert(sortedArr[i]);
-    }
-    delete[] sortedArr;
-    unit = ready;
 }
 
 void tolkachev::encrypt (const std::string filenameIn, const std::string filenameOut) {

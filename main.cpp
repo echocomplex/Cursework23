@@ -80,21 +80,16 @@ void sortPartOfGroups (tolkachev& unit) {
     std::cin >> group;
     Student student;
     try {
-        /*
-        ОШИБКА В ЭТОМ БЛОКЕ
-        в список заносятся только отличники
-        */
         std::pair <List <Student>, List <Student>> p = unit.split(group);
-        List <Student> first = unit.sort(p.first);
-        List <Student> second = unit.sort(p.second);
-        std::cout << first.length() << std::endl;
-        std::cout << "FIRST SORTED GROUP:" << std::endl;
+        List <std::pair <Student, float>> first = unit.sort(p.first);
+        List <std::pair <Student, float>> second = unit.sort(p.second);
+        std::cout << std::endl << "FIRST SORTED GROUP:" << std::endl;
         for (int i = 0; i < first.length(); ++i) {
-            std::cout << first[i].getFirstName() << std::endl;
+            std::cout << first[i].first.getFirstName() << " ---> " << first[i].second << std::endl;
         }
         std::cout << std::endl << "SECOND SORTED GROUP:" << std::endl;
         for (int i = 0; i < second.length(); ++i) {
-            std::cout << second[i].getFirstName() << std::endl;
+            std::cout << second[i].first.getFirstName() << " ---> " << first[i].second << std::endl;
         }
     }
     catch (std::logic_error) {
@@ -133,6 +128,9 @@ int main () {
             break;
         case 4:
             sortPartOfGroups(unit);
+            break;
+        case 5:
+            std::cout << unit << std::endl;
             break;
         default:
             std::cerr << "You entered wrong num! Try again." << std::endl;
