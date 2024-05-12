@@ -2,14 +2,14 @@
 #define TOLKACHEV
 
 
-#include "List.hpp"
+#include "List.h"
 #include <sstream>
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <cstdio>
 #include <map>
-#include "Student.hpp"
+#include "Student.h"
 #include <ctime>
 
 

@@ -1,7 +1,7 @@
 #include <iostream>
-#include "List.hpp"
+#include "List.h"
 #include "tolkachev.h"
-#include "Student.hpp"
+#include "Student.h"
 
 
 void addStudent (tolkachev& unit) {
@@ -139,7 +139,7 @@ int main () {
     
     unit.toFile("data.txt");
 
-    // tolkachev::encrypt("data.txt", "data.enc");
+    tolkachev::encrypt("data.txt", "data.enc");
 
     return 0;
 }

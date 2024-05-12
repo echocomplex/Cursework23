@@ -1,8 +1,8 @@
-#ifndef CURSEWORK_STUDENT_HPP
-#define CURSEWORK_STUDENT_HPP
+#ifndef TOLKACH_STUD
+#define TOLKACH_STUD
 
 
-#include "List.hpp"
+#include "List.h"
 #include <string>
 #include <ostream>
 
@@ -63,4 +63,4 @@ public:
 };
 
 
-#endif // CURSEWORK_STUDENT_HPP
+#endif

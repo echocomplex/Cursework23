@@ -1,5 +1,5 @@
-#ifndef CURSEWORK_LIST_HPP
-#define CURSEWORK_LIST_HPP
+#ifndef LIST_H
+#define LIST_H
 
 
 #include <string>
@@ -254,4 +254,4 @@ template <typename T> bool List<T>::isExists (T data) {
     }
 }
 
-#endif // CURSEWORK_LIST_HPP
+#endif
